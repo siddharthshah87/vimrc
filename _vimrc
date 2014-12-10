@@ -327,7 +327,6 @@ function! VisualSelection(direction) range
     let @" = l:saved_reg
 endfunction
 
-
 " Returns true if paste mode is enabled
 function! HasPaste()
     if &paste
@@ -372,37 +371,39 @@ nnoremap td  :tabclose<CR>
 function FunctionHeading()
   let s:line=line(".")
   call setline(s:line,"/**")
-  call append(s:line," * Function: ")
-  call append(s:line," * ")
-  call append(s:line," * Input: ")
-  call append(s:line," * ")
-  call append(s:line," * Output: ")
-  call append(s:line," * ")
-  call append(s:line," * Description: ")
-  call append(s:line+1," * ")
-  call append(s:line+3," */")
+  exe 'normal! ' . "o"
+  call append(s:line+1," * Function: ")
+  call append(s:line+2," * ")
+  call append(s:line+3," * Input: ")
+  call append(s:line+4," * ")
+  call append(s:line+5," * Output: ")
+  call append(s:line+6," * ")
+  call append(s:line+7," * Description: ")
+  call append(s:line+8," * ")
+  call append(s:line+9," */")
   unlet s:line
 endfunction
 
-nmap 1 <Esc>mz:execute FunctionHeading()<RET>`zjA
+nmap 1 <Esc>mz:execute FunctionHeading()<CR>`zjA
 
 "Automatically adding comments section
 function FunctionHeadingPersonal()
   let s:line=line(".")
   call setline(s:line,"/**")
-  call append(s:line," * Function: ")
-  call append(s:line," * ")
-  call append(s:line," * Input: ")
-  call append(s:line," * ")
-  call append(s:line," * Output: ")
-  call append(s:line," * ")
-  call append(s:line," * Description: ")
-  call append(s:line+1," * ")
-  call append(s:line+1," * Author - Siddharth Shah")
-  call append(s:line+2," * Date - ".strftime("%b %d %Y"))
-  call append(s:line+3," */")
+  exe 'normal! ' . "o"
+  call append(s:line+1," * Function: ")
+  call append(s:line+2," * ")
+  call append(s:line+3," * Input: ")
+  call append(s:line+4," * ")
+  call append(s:line+5," * Output: ")
+  call append(s:line+6," * ")
+  call append(s:line+7," * Description: ")
+  call append(s:line+8," * ")
+  call append(s:line+9," * Author - Siddharth Shah")
+  call append(s:line+10," * Date - ".strftime("%b %d %Y"))
+  call append(s:line+11," */")
   unlet s:line
 endfunction
 
-nmap 2 <Esc>mz:execute FunctionHeadingPersonal()<RET>`zjA
+nmap 2 <Esc>mz:execute FunctionHeadingPersonal()<CR>`zjA
 
