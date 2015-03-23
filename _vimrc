@@ -366,6 +366,21 @@ nnoremap tn  :tabnext<Space>
 nnoremap tm  :tabm<Space>
 nnoremap td  :tabclose<CR>
 
+"Automatically adding comments section
+function FileHeading()
+  let s:line=line(".")
+  call setline(s:line,"/**")
+  exe 'normal! ' . "o"
+  call append(s:line+1," * @file .c ")
+  call append(s:line+2," * @author Siddharth Shah")
+  call append(s:line+3," * @date ".strftime("%b %d %Y"))
+  call append(s:line+4," * @brief Brief description of file")
+  call append(s:line+5," * ")
+  call append(s:line+6," */ ")
+  unlet s:line
+endfunction
+
+nmap 1 <Esc>mz:execute FileHeading()<CR>`zjA
 
 "Automatically adding comments section
 function FunctionHeading()
@@ -384,7 +399,7 @@ function FunctionHeading()
   unlet s:line
 endfunction
 
-nmap 1 <Esc>mz:execute FunctionHeading()<CR>`zjA
+nmap 2 <Esc>mz:execute FunctionHeading()<CR>`zjA
 
 "Automatically adding comments section
 function FunctionHeadingPersonal()
@@ -405,5 +420,87 @@ function FunctionHeadingPersonal()
   unlet s:line
 endfunction
 
-nmap 2 <Esc>mz:execute FunctionHeadingPersonal()<CR>`zjA
+nmap 3 <Esc>mz:execute FunctionHeadingPersonal()<CR>`zjA
+
+"Automatically adding comments section
+function FunctionHeading2()
+  let s:line=line(".")
+  call setline(s:line,"/**")
+  exe 'normal! ' . "o"
+  call append(s:line+1," * @name name_function ")
+  call append(s:line+2," * @brief description")
+  call append(s:line+3," * ")
+  call append(s:line+4," * Detail description")
+  call append(s:line+5," * ")
+  call append(s:line+6," * @param [in] name_input Description of input")
+  call append(s:line+7," * ")
+  call append(s:line+8," * @retval name_retvalue Description of ouptut")
+  call append(s:line+9," * ")
+  call append(s:line+10," * Example Usage: ")
+  call append(s:line+11," * @code ")
+  call append(s:line+12," *   name_function();//Description ")
+  call append(s:line+13," * @endcode ")
+  call append(s:line+14," */")
+  unlet s:line
+endfunction
+
+nmap 4 <Esc>mz:execute FunctionHeading2()<CR>`zjA
+
+"Automatically adding comments section
+function AddTodo()
+  let s:line=line(".")
+  call append(s:line,"// @todo { paradraph describing what is to be done }")
+  exe 'normal! ' . "o"
+  unlet s:line
+endfunction
+
+nmap 5 <Esc>mz:execute AddTodo()<CR>`zjA
+
+"Automatically adding comments section
+function AddGroupDef()
+  let s:line=line(".")
+  call setline(s:line,"/** ")
+  exe 'normal! ' . "o"
+  call append(s:line+1,"* @defgroup name_of_group Name Group") 
+  call append(s:line+2,"*/ ")
+  unlet s:line
+endfunction
+
+nmap 6 <Esc>mz:execute AddGroupDef()<CR>`zjA
+
+"Automatically adding comments section
+function Add2Group()
+  let s:line=line(".")
+  call setline(s:line,"/** @addtogroup name_of_group */")
+  exe 'normal! ' . "o"
+  unlet s:line
+endfunction
+
+nmap 7 <Esc>mz:execute Add2Group()<CR>`zjA
+
+"Automatically adding comments section
+function AddStartGroup()
+  let s:line=line(".")
+  call setline(s:line,"/*@{*/")
+  exe 'normal! ' . "o"
+  unlet s:line
+endfunction
+
+nmap 9 <Esc>mz:execute AddStartGroup()<CR>`zjA
+
+"Automatically adding comments section
+function AddEndGroup()
+  let s:line=line(".")
+  call setline(s:line,"/*@}*/")
+  exe 'normal! ' . "o"
+  unlet s:line
+endfunction
+
+nmap 0 <Esc>mz:execute AddEndGroup()<CR>`zjA
+
+
+
+map <F2> :execute "vimgrep /" . expand("<cword>") . "/j *.c" <Bar> cw<CR>
+
+map <F3> :execute "vimgrep /" . expand("<cword>") . "/j *.h" <Bar> cw<CR>
 
